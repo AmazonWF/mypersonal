@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Add your styling here */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-image: url('assets/int.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-box {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <!-- Username Field -->
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+
+                <!-- Password Field -->
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Function for handling login and username/password validation
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Username and password entered by the user
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Define the correct username and password (In a real app, this should be checked against the server)
+            const correctUsername = "user"; // Replace with your username
+            const correctPassword = "yourPassword"; // Replace with your password
+
+            // Validate the username and password
+            if (username === correctUsername && password === correctPassword) {
+                // If both are correct, set logged-in flag
+                localStorage.setItem("isLoggedIn", "true");
+                window.location.href = "splash.html";  // Redirect to the dashboard (index.html)
+            } else {
+                // If either username or password is incorrect, show an alert
+                alert("Invalid username or password! Please try again.");
+            }
+        });
+
+        if (username === correctUsername && password === correctPassword) {
+        // If both are correct, set logged-in flag
+        localStorage.setItem("isLoggedIn", "true");
+        window.location.href = "splash.html";  // Redirect to splash page first
+    } else {
+        // If either username or password is incorrect, show an alert
+        alert("Invalid username or password! Please try again.");
+    }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+/* Reset styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+}
+
+/* Background video */
+.background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Splash screen container */
+.splash-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+
+/* Message box */
+.message-box {
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid #000000;
+    border-radius: 15px;
+    padding: 30px 50px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Message content */
+#message {
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 2.5rem;
+    color: #ffffff;
+    opacity: 0;
+    transition: opacity 5s ease-in-out;
+    text-transform: uppercase;
+    visibility: visible;
+}
+
+/* Fade-in effect */
+.fade-in {
+    opacity: 1 !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
