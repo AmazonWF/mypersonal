@@ -27,10 +27,52 @@
 
     <section id="video-background-section">
         <div class="video-background">
-            <video autoplay loop>
+            <video id="background-video" autoplay loop muted>
                 <source src="for us.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
+            <button id="video-toggle-button" onclick="toggleVideo()">Pause</button>
+        </div>
+    </section>
+    <style>
+    #video-toggle-button {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #ff6347; /* Brightened color for visibility */
+        color: #fff;
+        border: 2px solid #fff;
+        padding: 12px 24px;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 25px;
+        cursor: pointer;
+        opacity: 0.9; /* Slightly more visible by default */
+        transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    #video-toggle-button:hover {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.1);
+        background: #ff4500; /* Darker shade on hover */
+    }
+    </style>
+    <script>
+        function toggleVideo() {
+            const video = document.getElementById('background-video');
+            const button = document.getElementById('video-toggle-button');
+            if (video.paused) {
+                video.play();
+                button.textContent = 'Pause';
+            } else {
+                video.pause();
+                button.textContent = 'Play';
+            }
+        }
+    </script>
+    
         </div>
     </section>
     
