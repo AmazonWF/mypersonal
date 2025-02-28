@@ -79,32 +79,25 @@ input[type="file"] {
     color: white;
     cursor: pointer;
 }
-
 /* Video Background Section */
 #video-background-section {
     position: relative;
     width: 100%;
-    height: 100vh; /* Full viewport height */
+    height: auto; /* Normal video size */
     overflow: hidden;
 }
 
 .video-background video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: auto; /* Maintain aspect ratio */
+    position: static;
+    width: 100%; /* Full container width */
     height: auto; /* Maintain aspect ratio */
-    min-width: 100%; /* Cover full width */
-    min-height: 20%; /* Cover full height */
-    transform: translate(-50%, -50%); /* Center the video */
-    object-fit: contain; /* Prevent cropping */
-    z-index: -1; /* Place video behind overlay */
+    object-fit: contain; /* Ensure video fits without cropping */
     background-color: black; /* Fallback color */
 }
 
 .video-overlay {
     position: absolute;
-    top: 50%;
+    top: 100%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #020202;
@@ -113,16 +106,17 @@ input[type="file"] {
 }
 
 .video-overlay h1 {
-    font-size: 48px;
+    font-size: 36px; /* Slightly reduced font size */
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
     margin-bottom: 10px;
 }
 
 .video-overlay p {
-    font-size: 18px;
+    font-size: 16px; /* Slightly reduced font size */
     font-family: 'Roboto', sans-serif;
 }
+
 
 /* Gallery Sections */
 .gallery {
