@@ -778,4 +778,31 @@
         }
     </script>
 </body>
+    <!-- Floating Navigation Buttons -->
+    <div class="floating-nav-buttons">
+        <button onclick="scrollToSection('photo-gallery')">My Photos</button>
+        <button onclick="scrollToSection('video-gallery')">My Videos</button>
+    </div>
+
+    <script>
+        // Floating buttons functionality
+        const floatingButtons = document.querySelector('.floating-nav-buttons');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                floatingButtons.classList.add('show');
+            } else {
+                floatingButtons.classList.remove('show');
+            }
+        });
+
+        // Smooth scroll to section
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+
 </html>

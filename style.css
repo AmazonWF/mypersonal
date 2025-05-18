@@ -283,3 +283,67 @@ body.dark-mode .gallery-item video {
     text-decoration: none;
     cursor: pointer;
 }
+/* Floating Navigation Buttons */
+.floating-nav-buttons {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.floating-nav-buttons.show {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+}
+
+.floating-nav-buttons button {
+    background-color: #4267B2;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.floating-nav-buttons button:hover {
+    background-color: #365899;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Dark mode styles for floating buttons */
+body.dark-mode .floating-nav-buttons button {
+    background-color: #3a3b3c;
+    color: #e4e6eb;
+}
+
+body.dark-mode .floating-nav-buttons button:hover {
+    background-color: #4e4f50;
+}
+
+/* Animation for floating buttons */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive design for floating buttons */
+@media (max-width: 768px) {
+    .floating-nav-buttons {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .floating-nav-buttons button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
