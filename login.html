@@ -134,11 +134,11 @@
             <form id="loginForm">
                 <div class="input-group">
                     <input type="text" id="username" name="username" required>
-                    <label for="username">Username</label>
+                    <label for="username">Our Call sign</label>
                 </div>
                 <div class="input-group">
                     <input type="password" id="password" name="password" required>
-                    <label for="password">Password</label>
+                    <label for="password"> Password The Date We Meet month/day/year</label>
                 </div>
                 <button type="submit">Login</button>
             </form>
@@ -150,8 +150,8 @@
             event.preventDefault();
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
-            const correctUsername = "user";
-            const correctPassword = "yourPassword";
+            const correctUsername = "love";
+            const correctPassword = "02-09-2016";
             
             if (username === correctUsername && password === correctPassword) {
                 localStorage.setItem("isLoggedIn", "true");
