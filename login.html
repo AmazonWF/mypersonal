@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login</title>
-  <link rel="stylesheet" href="style.css" />
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -59,6 +58,7 @@
     .input-group {
       position: relative;
       margin-bottom: 20px;
+      text-align: left;
       animation: slideIn 1s ease-in-out;
     }
 
@@ -69,15 +69,15 @@
 
     .input-group input {
       width: 100%;
-      padding: 12px 40px 12px 12px;
+      padding: 12px;
+      padding-right: 40px;
       font-size: 1rem;
       border-radius: 8px;
       border: 2px solid #ddd;
-      box-sizing: border-box;
-      transition: all 0.3s ease;
       background: transparent;
       color: #fff;
       outline: none;
+      box-sizing: border-box;
     }
 
     .input-group label {
@@ -92,7 +92,8 @@
       padding: 0 5px;
     }
 
-    .input-group input:focus, .input-group input:valid {
+    .input-group input:focus,
+    .input-group input:valid {
       border-color: #4CAF50;
     }
 
@@ -106,8 +107,8 @@
 
     .toggle-password {
       position: absolute;
-      top: 50%;
       right: 12px;
+      top: 50%;
       transform: translateY(-50%);
       cursor: pointer;
       color: #ccc;
@@ -118,28 +119,37 @@
       color: #fff;
     }
 
-    button {
+    .slider-container {
+      position: relative;
       width: 100%;
-      padding: 12px;
       background-color: #4CAF50;
-      color: white;
-      font-size: 1.1rem;
-      border: none;
-      border-radius: 8px;
+      border-radius: 50px;
+      height: 50px;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .slider-handle {
+      position: absolute;
+      height: 100%;
+      width: 50px;
+      background-color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 50px;
+      font-size: 1.5rem;
       cursor: pointer;
-      transition: transform 0.3s ease, background-color 0.3s ease;
-      animation: pulse 1.5s infinite;
+      transition: background-color 0.3s ease;
+      z-index: 1;
     }
 
-    button:hover {
-      background-color: #45a049;
-      transform: scale(1.05);
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
+    .slider-text {
+      color: white;
+      position: absolute;
+      left: 60px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
     }
   </style>
 </head>
@@ -157,7 +167,10 @@
           <label for="password">Password Date We Meet month/day/year</label>
           <span class="toggle-password" onclick="togglePassword()">👁️</span>
         </div>
-        <button type="submit">💝💗Continue💕💌</button>
+        <div class="slider-container" id="slider">
+          <div class="slider-handle" id="sliderHandle">➡️</div>
+          <span class="slider-text">Swipe to Continue</span>
+        </div>
       </form>
     </div>
   </div>
@@ -171,8 +184,39 @@
       icon.textContent = isPassword ? "🙈" : "👁️";
     }
 
-    document.getElementById("loginForm").addEventListener("submit", function(event) {
-      event.preventDefault();
+    const handle = document.getElementById('sliderHandle');
+    const slider = document.getElementById('slider');
+    let isDragging = false;
+    let startX = 0;
+
+    handle.addEventListener('mousedown', function (e) {
+      isDragging = true;
+      startX = e.clientX;
+      handle.style.transition = 'none';
+    });
+
+    document.addEventListener('mouseup', function () {
+      if (isDragging) {
+        isDragging = false;
+        const position = parseInt(handle.style.left) || 0;
+        const threshold = slider.offsetWidth - handle.offsetWidth - 10;
+        if (position >= threshold) {
+          submitLogin();
+        } else {
+          handle.style.left = '0px';
+          handle.style.transition = 'left 0.3s ease';
+        }
+      }
+    });
+
+    document.addEventListener('mousemove', function (e) {
+      if (!isDragging) return;
+      let deltaX = e.clientX - startX;
+      deltaX = Math.max(0, Math.min(deltaX, slider.offsetWidth - handle.offsetWidth));
+      handle.style.left = deltaX + 'px';
+    });
+
+    function submitLogin() {
       const username = document.getElementById("username").value;
       const password = document.getElementById("password").value;
       const correctUsername = "Love";
@@ -183,8 +227,10 @@
         window.location.href = "splash.html";
       } else {
         alert("Invalid username or password! Please try again.");
+        handle.style.left = '0px';
+        handle.style.transition = 'left 0.3s ease';
       }
-    });
+    }
   </script>
 </body>
 </html>
