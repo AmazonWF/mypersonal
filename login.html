@@ -141,6 +141,7 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
       z-index: 1;
+      left: 0;
     }
 
     .slider-text {
@@ -189,6 +190,7 @@
     let isDragging = false;
     let startX = 0;
 
+    // Mouse Events
     handle.addEventListener('mousedown', function (e) {
       isDragging = true;
       startX = e.clientX;
@@ -215,6 +217,36 @@
       deltaX = Math.max(0, Math.min(deltaX, slider.offsetWidth - handle.offsetWidth));
       handle.style.left = deltaX + 'px';
     });
+
+    // Touch Events for mobile
+    handle.addEventListener('touchstart', function (e) {
+      isDragging = true;
+      startX = e.touches[0].clientX;
+      handle.style.transition = 'none';
+      e.preventDefault(); // prevent scrolling while dragging
+    }, {passive: false});
+
+    document.addEventListener('touchend', function (e) {
+      if (isDragging) {
+        isDragging = false;
+        const position = parseInt(handle.style.left) || 0;
+        const threshold = slider.offsetWidth - handle.offsetWidth - 10;
+        if (position >= threshold) {
+          submitLogin();
+        } else {
+          handle.style.left = '0px';
+          handle.style.transition = 'left 0.3s ease';
+        }
+      }
+    });
+
+    document.addEventListener('touchmove', function (e) {
+      if (!isDragging) return;
+      let deltaX = e.touches[0].clientX - startX;
+      deltaX = Math.max(0, Math.min(deltaX, slider.offsetWidth - handle.offsetWidth));
+      handle.style.left = deltaX + 'px';
+      e.preventDefault(); // prevent scrolling while dragging
+    }, {passive: false});
 
     function submitLogin() {
       const username = document.getElementById("username").value;
