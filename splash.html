@@ -1,109 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Special Message</title>
-    <link rel="stylesheet" href="splash.css">
-    <style>
-        /* Reset styles */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Poppins', sans-serif;
-            overflow: hidden;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Special Message</title>
+  <link rel="stylesheet" href="splash.css" />
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      background: black;
+    }
 
-        /* Splash screen container */
-        .splash-screen {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            height: 100%;
-            width: 100%;
-        }
+    .splash-screen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 100%;
+      width: 100%;
+      flex-direction: column;
+    }
 
-        /* Message box with transparent background */
-        .message-box {
-            background: transparent;
-            border: none;
-            padding: 30px 50px;
-        }
+    .message-box {
+      background: transparent;
+      border: none;
+      padding: 30px 50px;
+    }
 
-        /* Message content */
-        #message {
-            font-size: 2rem;
-            font-weight: bold;
-            line-height: 2.5rem;
-            color: #ffffff;
-            opacity: 0;
-            transition: opacity 5s ease-in-out;
-        }
+    #message {
+      font-size: 2rem;
+      font-weight: bold;
+      line-height: 2.5rem;
+      color: #ffffff;
+      opacity: 0;
+      transition: opacity 5s ease-in-out;
+    }
 
-        /* Fade-in effect */
-        .fade-in {
-            opacity: 1 !important;
-        }
+    .fade-in {
+      opacity: 1 !important;
+    }
 
-        /* Background video */
-        .background-video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-        }
-    </style>
+    #start-button {
+      padding: 1em 2em;
+      font-size: 1.2em;
+      margin-top: 20px;
+      cursor: pointer;
+      display: none;
+    }
+  </style>
 </head>
 <body>
-    <video class="background-video" autoplay muted loop>
-        <source src="memories.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+  <!-- Audio Element -->
+  <audio id="bg-music" loop>
+    <source src="assets/palagi.mp3" type="audio/mp3" />
+    Your browser does not support the audio element.
+  </audio>
 
-    <div class="splash-screen">
-        <div class="message-box">
-            <p id="message"></p>
-        </div>
+  <!-- Message Display -->
+  <div class="splash-screen">
+    <div class="message-box">
+      <p id="message"></p>
+      <button id="start-button">Tap to see message</button>
     </div>
+  </div>
 
-    <script>
-        const messages = [
-            "Hi mahal, salamat kay ni click ka sa link na akong gi gama.",
-            "I create this for you only to keep our memories forever.",
-            "You may keep it or not; it will still be available forever.",
-            "And I super miss you so much, bubu nahu."
-        ];
+  <script>
+    const bgMusic = document.getElementById("bg-music");
+    const startBtn = document.getElementById("start-button");
+    const messages = [
+      "My Love,",
+      "If you're reading this, it means I’ve already left this world—but know this:",
+      "I never truly left *you*. My love for you is deeper than the oceans and more infinite than time.",
+      "No goodbye could ever carry the weight of all I feel for you.",
+      "You gave my life meaning, joy, and beauty I never thought I deserved.",
+      "Your love saved me in ways you may never fully understand.",
+      "Thank you—for sacrificing so much for me, for standing by me when everything fell apart,",
+      "and for never stopping to believe in me… even when I had lost all belief in myself.",
+      "You were my strength when I was at my weakest, my hope when I had none left.",
+      "You are the person I asked God for during my darkest nights.",
+      "And the moment I met you, I knew—He answered my prayer by sending me you.",
+      "I will always believe that you were Heaven’s greatest gift to me.",
+      "Please don’t remember me with sorrow, but with the laughter we shared, the quiet moments,",
+      "the embraces that said more than words ever could.",
+      "Let the memory of our love be your anchor and your wings—both your grounding and your freedom.",
+      "Live. Laugh. Love. Shine brighter than ever before. That’s what I want for you.",
+      "And when you look up at the sky, know I’m there… smiling,",
+      "watching over you, still loving you beyond this life.",
+      "Forever yours,",
+      "Love"
+    ];
 
-        const messageElement = document.getElementById("message");
-        let index = 0;
+    const messageElement = document.getElementById("message");
+    let index = 0;
 
-        function displayMessage() {
-            messageElement.textContent = messages[index];
-            messageElement.classList.add("fade-in");
+    function displayMessage() {
+      messageElement.textContent = messages[index];
+      messageElement.classList.add("fade-in");
 
-            setTimeout(function () {
-                messageElement.classList.remove("fade-in");
-                index++;
-
-                if (index < messages.length) {
-                    setTimeout(displayMessage, 1000);
-                } else {
-                    setTimeout(() => {
-                        window.location.href = "index.html";
-                    }, 5000);
-                }
-            }, 5000);
+      setTimeout(() => {
+        messageElement.classList.remove("fade-in");
+        index++;
+        if (index < messages.length) {
+          setTimeout(displayMessage, 1000);
+        } else {
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 5000);
         }
+      }, 5000);
+    }
 
-        displayMessage();
-    </script>
+    function startEverything() {
+      bgMusic.play();
+      startBtn.style.display = "none";
+      displayMessage();
+    }
+
+    window.addEventListener("load", () => {
+      const playAttempt = bgMusic.play();
+
+      if (playAttempt !== undefined) {
+        playAttempt
+          .then(() => {
+            displayMessage(); // autoplay works
+          })
+          .catch(() => {
+            startBtn.style.display = "block"; // show button if autoplay blocked
+            startBtn.addEventListener("click", startEverything, { once: true });
+          });
+      }
+    });
+  </script>
 </body>
 </html>
