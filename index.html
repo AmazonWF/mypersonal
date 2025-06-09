@@ -10,6 +10,17 @@
     if (localStorage.getItem("isLoggedIn") !== "true") {
       window.location.href = "login.html";
     }
+
+    // On login success
+localStorage.setItem('loggedIn', 'true');
+window.location.href = '/index.html';  // Or wherever your dashboard is
+
+// On dashboard.html, add this script at the top
+if (localStorage.getItem('loggedIn') !== 'true') {
+  // User not logged in, redirect to login page
+  window.location.href = '/login.html';
+}
+
   </script>
 </head>
 <body class="dark-mode">

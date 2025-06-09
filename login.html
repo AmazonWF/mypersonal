@@ -127,6 +127,7 @@
       height: 50px;
       overflow: hidden;
       user-select: none;
+      touch-action: pan-y;
     }
 
     .slider-handle {
@@ -189,10 +190,18 @@
     let isDragging = false;
     let startX = 0;
 
+    // Desktop support
     handle.addEventListener('mousedown', function (e) {
       isDragging = true;
       startX = e.clientX;
       handle.style.transition = 'none';
+    });
+
+    document.addEventListener('mousemove', function (e) {
+      if (!isDragging) return;
+      let deltaX = e.clientX - startX;
+      deltaX = Math.max(0, Math.min(deltaX, slider.offsetWidth - handle.offsetWidth));
+      handle.style.left = deltaX + 'px';
     });
 
     document.addEventListener('mouseup', function () {
@@ -209,11 +218,32 @@
       }
     });
 
-    document.addEventListener('mousemove', function (e) {
+    // Mobile touch support
+    handle.addEventListener('touchstart', function (e) {
+      isDragging = true;
+      startX = e.touches[0].clientX;
+      handle.style.transition = 'none';
+    });
+
+    document.addEventListener('touchmove', function (e) {
       if (!isDragging) return;
-      let deltaX = e.clientX - startX;
+      let deltaX = e.touches[0].clientX - startX;
       deltaX = Math.max(0, Math.min(deltaX, slider.offsetWidth - handle.offsetWidth));
       handle.style.left = deltaX + 'px';
+    });
+
+    document.addEventListener('touchend', function () {
+      if (isDragging) {
+        isDragging = false;
+        const position = parseInt(handle.style.left) || 0;
+        const threshold = slider.offsetWidth - handle.offsetWidth - 10;
+        if (position >= threshold) {
+          submitLogin();
+        } else {
+          handle.style.left = '0px';
+          handle.style.transition = 'left 0.3s ease';
+        }
+      }
     });
 
     function submitLogin() {
